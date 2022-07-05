@@ -13,8 +13,8 @@
     </head>
     <script>
 var ACCESS_TOKEN = "";
+var BACKEND_URL = "http://127.0.0.1:5000"
 var API_URL = "http://127.0.0.1:5000"
-
 window.onload = function(){
     get_access_token()
     getNoteData();
@@ -84,7 +84,7 @@ function getNoteData(){
 
 
 function get_access_token(){
-    var theUrl = API_URL + "/get_access_token";
+    var theUrl = BACKEND_URL + "/get_access_token";
     fetch(theUrl, {
         method: 'get',
         headers: {
