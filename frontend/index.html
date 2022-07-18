@@ -13,14 +13,14 @@
     </head>
     <script>
 var ACCESS_TOKEN = "";
-var BACKEND_URL = "http://127.0.0.1:5000"
-var API_URL = "http://127.0.0.1:5000"
+var BACKEND_URL = "http://127.0.0.1:5000";
+var API_URL = "http://127.0.0.1:5000";
 window.onload = function(){
     get_access_token()
     getNoteData();
     
 };
-
+var noteList = [];
 function getNoteData(){
     var theUrl = BACKEND_URL + "/get_notes";
     fetch(theUrl, {
@@ -32,6 +32,7 @@ function getNoteData(){
     .then( function(text) {
     console.log('Response', text);
     data = JSON.parse(text);
+    noteList = JSON.parse(text);
     var _tr_ = document.createElement('tr'),
         _th_ = document.createElement('th'),
         _td_ = document.createElement('td');
@@ -100,11 +101,10 @@ function get_access_token(){
 
 async function send_note(index){
 
-    var data = getJsonNoteData();
     var theUrl = API_URL + "/analysis-note";  
     note_data = {
         "user_email": "testsurup+testApi1@gmail.com",
-        "note":data[index]
+        "note":noteList[index]
     }
     await fetch(theUrl, {
     method: 'POST',
