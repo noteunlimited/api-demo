@@ -22,7 +22,7 @@ window.onload = function(){
 };
 
 function getNoteData(){
-    var theUrl = API_URL + "/get_notes";
+    var theUrl = BACKEND_URL + "/get_notes";
     fetch(theUrl, {
         method: 'get',
         headers: {
