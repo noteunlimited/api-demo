@@ -9,12 +9,12 @@
             crossorigin="anonymous">
         <!-- <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script> -->
         <meta charset="UTF-8">
-        <title>FlaskApp</title>
+        <title>Noteunlimited Demo API</title>
     </head>
     <script>
 var ACCESS_TOKEN = "";
-var BACKEND_URL = "http://127.0.0.1:5000";
-var API_URL = "http://127.0.0.1:5000";
+var BACKEND_URL = "http://127.0.0.1:5003";
+var API_URL = "http://127.0.0.1:5001";
 window.onload = function(){
     get_access_token()
     getNoteData();
@@ -101,7 +101,7 @@ function get_access_token(){
 
 async function send_note(index){
 
-    var theUrl = API_URL + "analysis-note";  
+    var theUrl = API_URL + "analyze-note";  
     note_data = {
         "user_email": "testsurup+testApi1@gmail.com",
         "note":noteList[index]
