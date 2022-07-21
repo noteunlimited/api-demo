@@ -68,6 +68,7 @@ function getNoteData(){
             }
         var td = _td_.cloneNode(false);
         td.appendChild(a);
+        td.id = "td_"+i;
         tr.appendChild(td);
         for (const [key, value] of Object.entries(data[i])) {
             var td = _td_.cloneNode(false);
@@ -99,14 +100,49 @@ function get_access_token(){
     ACCESS_TOKEN = resToken["token"];
     }) 
 }
+async function get_status(key){
+    var theUrl = API_URL + "request-status/"+key;  
+    await fetch(theUrl, {
+    method: 'GET',
+    mode: 'cors',
+    headers: {
+        'Content-Type': 'application/json',
+        'Bearer':ACCESS_TOKEN
+    }}).then(response => response.json())
+        .then(function(json) {
 
+        }).catch(function(err) {
+            console.log(err)
+        })
+   
+}
 async function send_note(index){
+
+    $("#loadMe").modal({
+      backdrop: "static", //remove ability to close modal with click
+      keyboard: false, //remove option to close with keyboard
+      show: true //Display loader!
+    });
 
     var theUrl = API_URL + "analyze-note";  
     note_data = {
         "user_email": "support@noteunlimited.com",
         "note":noteList[index]
-    }
+    }.then(response => response.json())
+        .then(function(json) {
+            if("report_url" in json){
+                let a= document.createElement('a');
+                a.target= '_blank';
+                a.href= json["report_url"][0];
+                a.click();
+                let ab= document.createElement('a');
+                ab.target= '_blank';
+                ab.href= json["report_url"][1];
+                ab.click();
+            }
+        }).catch(function(err) {
+            console.log(err)
+        })
     await fetch(theUrl, {
     method: 'POST',
     mode: 'cors',
@@ -118,14 +154,25 @@ async function send_note(index){
     }).then(response => response.json())
         .then(function(json) {
             if("report_url" in json){
+                var td = document.getElementById("td_"+index);
+                while (td.firstChild) {
+                    td.firstChild.remove()
+                }
                 let a= document.createElement('a');
+                var linkText = document.createTextNode("Show Reddeming Report");
+                a.appendChild(linkText);
                 a.target= '_blank';
                 a.href= json["report_url"][0];
-                a.click();
                 let ab= document.createElement('a');
+                var linkText = document.createTextNode("Show Summary Report");
+                ab.appendChild(linkText);
                 ab.target= '_blank';
                 ab.href= json["report_url"][1];
-                ab.click();
+                td.appendChild(a);
+                let br= document.createElement('br');
+                td.appendChild(br);
+                td.appendChild(ab);
+                $("#loadMe").modal("hide");
             }
         }).catch(function(err) {
             console.log(err)
@@ -201,6 +248,21 @@ async function send_note(index){
                 </div> -->
             </div>
         </div>
-
+        <!-- Modal -->
+        <div class="modal fade" id="loadMe" tabindex="-1" role="dialog"
+            aria-labelledby="loadMeLabel">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                          </div>
+                        <div clas="loader-txt">
+                            <p>Reports are generated...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
