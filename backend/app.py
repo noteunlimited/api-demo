@@ -3,7 +3,17 @@ from flask import Flask, json,jsonify
 from flask_cors import CORS
 from requests import get
 import os
+import logging
+from flask.logging import default_handler
+logging.getLogger().setLevel(0)
+logging.basicConfig(
+        filename=f"app.log",
+        level=logging.INFO,
+        format="%(asctime)s - %(levelname)s - %(filename)s:%(lineno)s - %(funcName)20s()- %(message)s",
+        datefmt='%Y-%m-%d %H:%M:%S')
 
+log = logging.getLogger("import_api")
+log.addHandler(default_handler)
 
 app = Flask(__name__)
 CORS(app)
