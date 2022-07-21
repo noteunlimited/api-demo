@@ -127,21 +127,7 @@ async function send_note(index){
     note_data = {
         "user_email": "support@noteunlimited.com",
         "note":noteList[index]
-    }.then(response => response.json())
-        .then(function(json) {
-            if("report_url" in json){
-                let a= document.createElement('a');
-                a.target= '_blank';
-                a.href= json["report_url"][0];
-                a.click();
-                let ab= document.createElement('a');
-                ab.target= '_blank';
-                ab.href= json["report_url"][1];
-                ab.click();
-            }
-        }).catch(function(err) {
-            console.log(err)
-        })
+    }
     await fetch(theUrl, {
     method: 'POST',
     mode: 'cors',
