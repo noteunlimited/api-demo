@@ -59,13 +59,12 @@ function getNoteData(){
         a.appendChild(linkText);
         a.title = "Show Report On Noteunlimited.com";
         a.href = "javascript:void(0);";
-        if(i==0)
-           {
+        if(i==0) {
             a.onclick = function() { send_note(0) };
-           }
-            else{
-                a.onclick = function() { send_note(1) };
-            }
+        }
+        else{
+            a.onclick = function() { send_note(1) };
+        }
         var td = _td_.cloneNode(false);
         td.appendChild(a);
         td.id = "td_"+i;
@@ -100,22 +99,22 @@ function get_access_token(){
     ACCESS_TOKEN = resToken["token"];
     }) 
 }
-async function get_status(key){
-    var theUrl = API_URL + "request-status/"+key;  
-    await fetch(theUrl, {
-    method: 'GET',
-    mode: 'cors',
-    headers: {
-        'Content-Type': 'application/json',
-        'Bearer':ACCESS_TOKEN
-    }}).then(response => response.json())
-        .then(function(json) {
+// async function get_status(key){
+//     var theUrl = API_URL + "request-status/"+key;  
+//     await fetch(theUrl, {
+//     method: 'GET',
+//     mode: 'cors',
+//     headers: {
+//         'Content-Type': 'application/json',
+//         'Bearer':ACCESS_TOKEN
+//     }}).then(response => response.json())
+//         .then(function(json) {
 
-        }).catch(function(err) {
-            console.log(err)
-        })
+//         }).catch(function(err) {
+//             console.log(err)
+//         })
    
-}
+// }
 async function send_note(index){
 
     // $("#loadMe").modal({
