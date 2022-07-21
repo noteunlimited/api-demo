@@ -7,7 +7,6 @@
             rel="stylesheet"
             integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
             crossorigin="anonymous">
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
         <!-- <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script> -->
         <meta charset="UTF-8">
         <title>Noteunlimited Demo API</title>
@@ -119,11 +118,11 @@ async function get_status(key){
 }
 async function send_note(index){
 
-    $("#loadMe").modal({
-      backdrop: "static", //remove ability to close modal with click
-      keyboard: false, //remove option to close with keyboard
-      show: true //Display loader!
-    });
+    // $("#loadMe").modal({
+    //   backdrop: "static", //remove ability to close modal with click
+    //   keyboard: false, //remove option to close with keyboard
+    //   show: true //Display loader!
+    // });
 
     var theUrl = API_URL + "analyze-note";  
     note_data = {
@@ -173,7 +172,7 @@ async function send_note(index){
                 let br= document.createElement('br');
                 td.appendChild(br);
                 td.appendChild(ab);
-                $("#loadMe").modal("hide");
+                // $("#loadMe").modal("hide");
             }
         }).catch(function(err) {
             console.log(err)
@@ -250,20 +249,20 @@ async function send_note(index){
             </div>
         </div>
         <!-- Modal -->
-        <div class="modal fade" id="loadMe" tabindex="-1" role="dialog"
+        <!-- <div class="modal fade" id="loadMe" tabindex="-1" role="dialog"
             aria-labelledby="loadMeLabel">
             <div class="modal-dialog modal-sm" role="document">
                 <div class="modal-content">
                     <div class="modal-body text-center">
                         <div class="spinner-border" role="status">
                             <span class="visually-hidden">Loading...</span>
-                          </div>
+                        </div>
                         <div clas="loader-txt">
                             <p>Reports are generated...</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </body>
 </html>
