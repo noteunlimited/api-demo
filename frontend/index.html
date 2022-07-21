@@ -30,7 +30,6 @@ function getNoteData(){
         },
     }).then(response => response.text())
     .then( function(text) {
-    console.log('Response', text);
     data = JSON.parse(text);
     noteList = JSON.parse(text);
     var _tr_ = document.createElement('tr'),
@@ -93,7 +92,6 @@ function get_access_token(){
         },
     }).then(response => response.text())
     .then( function(text) {
-    console.log('Response', text);
     resToken = JSON.parse(text)
     sessionStorage.setItem('token', resToken["token"]);
     ACCESS_TOKEN = resToken["token"];
