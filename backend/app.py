@@ -19,25 +19,19 @@ app = Flask(__name__)
 CORS(app)
 
 
-global ACCESS_TOKEN
-ACCESS_TOKEN = None
-
 @app.route("/get_access_token", methods=["GET"])
 def get_access_token() -> str:
-    global ACCESS_TOKEN
-    if ACCESS_TOKEN is None:
-        headers = {
+    ACCESS_TOKEN = ""
+    headers = {
             'X-API-Key': USER_API_KEY
             }
-        result = get(f"{API_URL}access-token/{USER_API_EMAIL}/{USER_API_KEY_NAME}",headers = headers,verify=False)
-        res_json = result.json()
-        if result.status_code == 200:
-            ACCESS_TOKEN = res_json
-            return ACCESS_TOKEN
-        else:
-            return res_json
-    else:
+    result = get(f"{API_URL}/access-token/{USER_API_EMAIL}/{USER_API_KEY_NAME}",headers = headers,verify=False)
+    res_json = result.json()
+    if result.status_code == 200:
+        ACCESS_TOKEN = res_json
         return ACCESS_TOKEN
+    else:
+        return res_json
 
 
 @app.route("/get_notes", methods=["GET"])
