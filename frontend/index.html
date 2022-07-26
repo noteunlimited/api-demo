@@ -127,25 +127,26 @@ function send_note(index){
         'Bearer':ACCESS_TOKEN
     },
     success: function(json){
-        hideLoad();
+        
         if("result" in json && 'errors' in json.result && json.result.errors.length >0){
-            alert(error.responseJSON.result.errors.length.join(";\r\n"))
+            alert(json.result.errors.join(";\r\n"))
+            $("#statusModal").modal("hide");
         }
         if("report_url" in json){
-                let a= document.getElementById("redeemingReportLink");
-                a.target= '_blank';
-                a.href= json["report_url"][0];
-                let ab=  document.getElementById("summoryReportLink");
-                ab.target= '_blank';
-                ab.href= json["report_url"][1];
+            hideLoad();
+            let a= document.getElementById("redeemingReportLink");
+            a.target= '_blank';
+            a.href= json["report_url"][0];
+            let ab=  document.getElementById("summoryReportLink");
+            ab.target= '_blank';
+            ab.href= json["report_url"][1];
             }
     },
     error: function(error){
-        hideLoad();
         $("#statusModal").modal("hide");
         if("responseJSON" in error){
             if('result' in error.responseJSON && 'errors' in error.responseJSON.result && error.responseJSON.result.errors.length > 0){
-                alert(error.responseJSON.result.errors.length.join(";\r\n"))
+                alert(error.responseJSON.result.errors.join(";\r\n"))
                 return;
             }
             if('result' in error.responseJSON && 'result' in error.responseJSON.result){
@@ -225,7 +226,7 @@ function showLoad(){
                             <button type="button" class="btn btn-secondary"
                                 data-bs-dismiss="modal">Close</button>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
