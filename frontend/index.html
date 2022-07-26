@@ -108,22 +108,7 @@ function get_access_token(){
     ACCESS_TOKEN = resToken["token"];
     }) 
 }
-// async function get_status(key){
-//     var theUrl = API_URL + "request-status/"+key;  
-//     await fetch(theUrl, {
-//     method: 'GET',
-//     mode: 'cors',
-//     headers: {
-//         'Content-Type': 'application/json',
-//         'Bearer':ACCESS_TOKEN
-//     }}).then(response => response.json())
-//         .then(function(json) {
 
-//         }).catch(function(err) {
-//             console.log(err)
-//         })
-   
-// }
 function send_note(index){
 
     showLoad();
@@ -157,9 +142,17 @@ function send_note(index){
             }
     },
     error: function(error){
+        hideLoad();
         $("#statusModal").modal("hide");
         if("responseJSON" in error){
-            alert(error.responseJSON.Message)
+            if('result' in error.responseJSON && 'errors' in error.responseJSON.result.errors && error.responseJSON.result.errors.length > 0){
+                alert(error.responseJSON.result.errors.length.join(";\r\n"))
+                return;
+            }
+            if('result' in error.responseJSON && 'result' in error.responseJSON.result){
+                alert(error.responseJSON.result)
+                return;
+            }
         }
     }
   });
