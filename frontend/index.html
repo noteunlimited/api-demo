@@ -14,8 +14,8 @@
     </head>
     <script>
 var ACCESS_TOKEN = "";
-var BACKEND_URL = "http://127.0.0.1:5003";
-var API_URL = "https://api-stage.noteunlimited.com";
+var BACKEND_URL = "http://127.0.0.1:5009";
+var API_URL = "https://api.noteunlimited.com";
 
 var grid = null;
 
@@ -46,13 +46,13 @@ function getNoteData(){
 
     { 
         name: 'Actions',
-        width: '1vw',
+        width: '150px',
         formatter: (cell, row, i) => {
           return gridjs.h('button', {
             className: 'btn btn-info',
             'data-bs-toggle':"modal",
             'data-bs-target':"#statusModal",
-            onClick: () => send_note(row.cells[0].data)
+            onClick: () => send_note(row.cells[0].data) 
           }, 'Get Report');
         }
       },
@@ -181,22 +181,6 @@ function showLoad(){
                 1.25vw">
                 <div id="wrapper"></div>
             </div>
-            <!-- <div class="row" style="padding-top:
-                1.25vw">
-                <div class="table-responsive">
-                    <table class="table" id="table">
-                        <thead>
-                            <tr id="header">
-
-                            </tr>
-                        </thead>
-                        <tbody id="tableBody">
-
-                        </tbody>
-                    </table>
-                </div>
-               
-            </div> -->
         </div>
         <!-- Modal -->
         <div class="modal fade" id="statusModal" tabindex="-1"

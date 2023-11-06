@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  demo-page:
+    image: demo-page
+    build:
+      context: ./frontend
+    volumes:
+      - ./frontend:/usr/local/apache2/htdocs
+    ports:
+      - 5500:80
